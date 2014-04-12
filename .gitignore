@@ -1,0 +1,6 @@
+# IntelliJ files
+.idea
+*.iml
+
+# Target
+dd-jdbc-saleskit-demo/target
