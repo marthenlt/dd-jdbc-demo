@@ -1,4 +1,4 @@
-package com.datec.type5.contents.controller;
+package com.progress.singapore.datadirect.jdbc.demo.saleskit.contents.controller;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
-import com.datec.type5.common.BulkLoadFactory;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.BulkLoadFactory;
 import com.ddtek.jdbc.extensions.DDBulkLoad;
 
 public class TestBulkLoad {

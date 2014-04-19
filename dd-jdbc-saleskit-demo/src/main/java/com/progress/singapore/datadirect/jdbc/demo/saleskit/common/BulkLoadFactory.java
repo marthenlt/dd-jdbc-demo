@@ -1,4 +1,4 @@
-package com.datec.type5.common;
+package com.progress.singapore.datadirect.jdbc.demo.saleskit.common;
 
 import java.sql.Connection;
 import java.sql.SQLException;

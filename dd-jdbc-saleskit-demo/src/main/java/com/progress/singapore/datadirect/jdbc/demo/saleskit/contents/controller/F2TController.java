@@ -1,13 +1,12 @@
-package com.datec.type5.contents.controller;
+package com.progress.singapore.datadirect.jdbc.demo.saleskit.contents.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,30 +18,34 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.datec.type5.common.MessageSourceAccessor;
-import com.datec.type5.common.Record;
-import com.datec.type5.common.WebUtil;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.BulkLoadFactory;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.Record;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.WebUtil;
+import com.ddtek.jdbc.extensions.DDBulkLoad;
 
 @Controller
-public class SelectController implements ApplicationContextAware {
+public class F2TController implements ApplicationContextAware {
 	private Log log = LogFactory.getLog(InsertController.class);
 	
 	private ApplicationContext applicationContext;
 	
-	@RequestMapping("/type5/demo/select.do")
+	@RequestMapping("/type5/demo/f2t.do")
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception  {
-		return new ModelAndView("demo_select");
+		return new ModelAndView("demo_f2t");
 	}
 	
-	@RequestMapping("/type5/demo/data/select.do")
-	public void doSelect(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/type5/demo/data/f2t_type4.do")
+	public void doT2TWithType4(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+	}
+	
+	@RequestMapping("/type5/demo/data/f2t.do")
+	public void doT2TWithType5(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Record rtnData = new Record();
 		JSONObject obj = new JSONObject();
 		try {
@@ -58,20 +61,11 @@ public class SelectController implements ApplicationContextAware {
 			String sDate = sdf.format(new Date());
 			long sTime = System.currentTimeMillis();
 			
-			int result = select(dataSource, 
-					params.getString("query", MessageSourceAccessor.getInstance().getMessage("QUERY.SELECT_01")),
-					new HashMap<String, String>());
-			
-			/*NamedParameterJdbcOperations operations = new NamedParameterJdbcTemplate(dataSource);
-			List<Map<String, Object>> resultList = operations.query(params.getString("query"), new HashMap<String, String>(), new RowMapper<Map<String, Object>>() {
-				@Override
-				public Map<String, Object> mapRow(ResultSet paramResultSet, int paramInt) throws SQLException {
-					return null;
-				}
-			});*/
+			DDBulkLoad bulkLoader = BulkLoadFactory.getInstance(DataSourceUtils.getConnection(dataSource));
+			bulkLoader.setTableName(params.getString("table"));
+			bulkLoader.load(new File(params.getString("file")));
 			
 			sb.append(sDate + " ~ " + sdf.format(new Date()));
-			sb.append("\nrows    : " + result);
 			sb.append("\nrunning : " + (System.currentTimeMillis() - sTime) + " ms");
 			
 			rtnData.put("RESULT_CONTENTS", sb.toString());
@@ -89,26 +83,8 @@ public class SelectController implements ApplicationContextAware {
 		}
 	}
 	
-	private int select(DataSource dataSource, String query, Map<String, ?> paramMap) {
-		NamedParameterJdbcOperations operations = new NamedParameterJdbcTemplate(dataSource);
-/*		List<Map<String, Object>> result = operations.queryForList(query, paramMap);
-		int i = 0;
-		for (Map<String, Object> r : result) {
-			i++;
-			log.error(i + " : "  + r);
-		}*/
-		List<Map<String, Object>> result = operations.query(query, paramMap, new RowMapper<Map<String, Object>>() {
-			@Override
-			public Map<String, Object> mapRow(ResultSet paramResultSet, int paramInt) throws SQLException {
-				return null;
-			}
-		});
-		return result.size();
-	}
-	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}
-
 }

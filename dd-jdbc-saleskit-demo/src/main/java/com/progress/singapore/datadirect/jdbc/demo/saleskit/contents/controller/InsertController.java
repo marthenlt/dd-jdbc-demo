@@ -1,4 +1,4 @@
-package com.datec.type5.contents.controller;
+package com.progress.singapore.datadirect.jdbc.demo.saleskit.contents.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -24,9 +24,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.datec.type5.common.MessageSourceAccessor;
-import com.datec.type5.common.Record;
-import com.datec.type5.common.WebUtil;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.MessageSourceAccessor;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.Record;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.WebUtil;
 
 @Controller
 public class InsertController implements ApplicationContextAware {

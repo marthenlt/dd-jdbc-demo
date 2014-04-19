@@ -25,6 +25,9 @@
         <module name="dd-jdbc-saleskit-demo" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dd-jdbc-saleskit-demo" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 

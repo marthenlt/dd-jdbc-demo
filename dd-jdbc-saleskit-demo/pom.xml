@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.progress.singapore.datadirect.jdbc.demo</groupId>
+    <groupId>com.progress.singapore.datadirect.jdbc.demo.saleskit</groupId>
     <artifactId>dd-jdbc-saleskit-demo</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -54,12 +54,13 @@
                     </excludes>
                 </configuration>
             </plugin>
-
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
+                    <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
                     <webResources>
                         <resource>
                             <directory>src/main/java</directory>
@@ -67,7 +68,7 @@
                     </webResources>
                 </configuration>
             </plugin>
-
+-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -130,6 +131,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>${spring.version}</version>
         </dependency>
@@ -154,6 +160,7 @@
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -179,6 +186,7 @@
             <artifactId>spring-security-acl</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        -->
         <!-- JSF Implementation -->
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -534,6 +542,43 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.21</version>
         </dependency>
+
+        <!-- added maven artifacts -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <!-- datadirect for postgresql -->
+        <dependency>
+            <groupId>com.ddtek.jdbc.postgresql</groupId>
+            <artifactId>dd-postgresql</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+        <!-- datadirect for oracle driver -->
+        <dependency>
+            <groupId>com.ddtek.jdbc.oracle</groupId>
+            <artifactId>dd-oracle</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+        <!-- datadirect for sqlserver-->
+        <dependency>
+            <groupId>com.ddtek.jdbc.sqlserver</groupId>
+            <artifactId>dd-sqlserver</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+        <!-- datadrect for mysql-->
+        <dependency>
+            <groupId>com.ddtek.jdbc.mysql</groupId>
+            <artifactId>dd-mysql</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

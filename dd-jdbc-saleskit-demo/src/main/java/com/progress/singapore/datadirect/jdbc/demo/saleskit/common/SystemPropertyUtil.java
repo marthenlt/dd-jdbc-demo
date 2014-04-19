@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.datec.type5.common;
+package com.progress.singapore.datadirect.jdbc.demo.saleskit.common;
 
 import java.util.Map;
 

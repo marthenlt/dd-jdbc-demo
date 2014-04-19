@@ -1,4 +1,4 @@
-package com.datec.type5.contents.controller;
+package com.progress.singapore.datadirect.jdbc.demo.saleskit.contents.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -29,11 +29,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.datec.type5.common.BulkLoadFactory;
-import com.datec.type5.common.Record;
-import com.datec.type5.common.WebUtil;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.BulkLoadFactory;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.Record;
+import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.WebUtil;
 import com.ddtek.jdbc.extensions.DDBulkLoad;
 import com.ddtek.jdbc.extensions.DDBulkLoadFactory;
+import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Controller
 public class T2FController implements ApplicationContextAware {

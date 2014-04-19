@@ -1,4 +1,4 @@
-package com.datec.type5.contents.controller;
+package com.progress.singapore.datadirect.jdbc.demo.saleskit.contents.controller;
 
 public class Test {
 	public static void main(String[] args) {
