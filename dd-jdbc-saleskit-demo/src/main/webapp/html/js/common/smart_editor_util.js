@@ -71,7 +71,7 @@ function deleteImgFile(targetImgList){
         },
         success: function(result, status, xmlhttprequest){
         	if(result.status == "fail"){
-        		alert("첨부파일 처리중 오류가 발생하였습니다.");
+        		alert("There was an error processing attachments.");
         		return false;
         	}
         },

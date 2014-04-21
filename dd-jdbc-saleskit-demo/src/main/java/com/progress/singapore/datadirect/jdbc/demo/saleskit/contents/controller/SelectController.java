@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -32,7 +31,7 @@ import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.WebUtil;
 
 @Controller
 public class SelectController implements ApplicationContextAware {
-	private Log log = LogFactory.getLog(InsertController.class);
+	private Logger log = Logger.getLogger(InsertController.class);
 	
 	private ApplicationContext applicationContext;
 	
@@ -47,7 +46,7 @@ public class SelectController implements ApplicationContextAware {
 		JSONObject obj = new JSONObject();
 		try {
 			Record params = WebUtil.getParametersStartingWith(request);
-			log.debug("params : " + params.toString());
+			log.info("params : " + params.toString());
 			DataSource dataSource = this.applicationContext.getBean(params.getString("ds"), DataSource.class);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");

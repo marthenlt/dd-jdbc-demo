@@ -14,8 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -33,7 +32,7 @@ import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.WebUtil;
 
 @Controller
 public class SelectMultiController implements ApplicationContextAware {
-	private Log log = LogFactory.getLog(InsertController.class);
+	private Logger log = Logger.getLogger(InsertController.class);
 	
 	private ApplicationContext applicationContext;
 	
@@ -48,7 +47,7 @@ public class SelectMultiController implements ApplicationContextAware {
 		JSONObject obj = new JSONObject();
 		try {
 			Record params = WebUtil.getParametersStartingWith(request);
-			log.debug("params : " + params.toString());
+			log.info("params : " + params.toString());
 			final DataSource dataSource = this.applicationContext.getBean(params.getString("ds"), DataSource.class);
 			
 			final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -67,7 +66,7 @@ public class SelectMultiController implements ApplicationContextAware {
 				Thread t = new Thread(new Runnable() {
 					@Override
 					public void run() {
-						log.debug("START THREAD");
+						log.info("START THREAD");
 						String sDate = sdf.format(new Date());
 						long sTime = System.currentTimeMillis();
 						
@@ -79,7 +78,7 @@ public class SelectMultiController implements ApplicationContextAware {
 						long rTime = (System.currentTimeMillis() - sTime);
 						sb.append("\nrunning : " + rTime + " ms");
 						runTime.add(rTime);
-						log.debug("END " + rTime + " ms");
+						log.info("END " + rTime + " ms");
 					}
 				});
 				thread.add(t);
@@ -89,20 +88,20 @@ public class SelectMultiController implements ApplicationContextAware {
 			}
 			int endCnt = 0;
 			while (threads > endCnt) {
-				log.debug("check thread");
+				log.info("check thread");
 				endCnt = 0;
 				for (Thread t : thread) {
 					if (!t.isAlive()) {
 						endCnt++;
 					}
 				}
-				log.debug("endCnt : " + endCnt);
+				log.info("endCnt : " + endCnt);
 				Thread.sleep(2000);
 			};
 			
 			long avgTime = 0L;
 			for (long avg : runTime) {
-				log.debug("run : " + avg);
+				log.info("run : " + avg);
 				avgTime += avg;
 			}
 			avgTime = avgTime/threads;

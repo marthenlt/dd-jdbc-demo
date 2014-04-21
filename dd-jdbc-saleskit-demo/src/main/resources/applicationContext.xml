@@ -46,18 +46,10 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.progress.singapore.datadirect.jdbc.demo.saleskit"/>
 
-    <!-- ========================= COMMON RESOURCE DEFINITIONS ========================= -->
-    <!-- was datasource 사용시 아래 주석 해제 -->
-    <!--
-    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" >
-        <property name="jndiName" value="java:comp/env/smartweb"/>
-        <property name="resourceRef" value="true" />
-    </bean>
-      -->
-
     <bean id="ds_type5" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${type5.driverClassName}"/>
-        <property name="url" value="${type5.url}"/>
+        <!--<property name="url" value="${type5.url}"/>-->
+        <property name="url" value="jdbc:datadirect:oracle://192.168.213.130:1521;SID=XE;EnableBulkLoad=true;BatchPerformanceWorkaround=true;SDUsize=8192;"/>
         <property name="username" value="${type5.username}"/>
         <property name="password" value="${type5.password}"/>
         <property name="defaultAutoCommit" value="true"/>
@@ -81,7 +73,8 @@
 
     <bean id="ds_type4" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${type4.driverClassName}"/>
-        <property name="url" value="${type4.url}"/>
+        <!--<property name="url" value="${type4.url}"/>-->
+        <property name="url" value="jdbc:oracle:thin:@//192.168.213.130:1521/XE"/>
         <property name="username" value="${type4.username}"/>
         <property name="password" value="${type4.password}"/>
         <property name="defaultAutoCommit" value="true"/>

@@ -18,8 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -29,8 +28,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.Record;
@@ -38,7 +35,7 @@ import com.progress.singapore.datadirect.jdbc.demo.saleskit.common.WebUtil;
 
 @Controller
 public class SelectScrollController implements ApplicationContextAware {
-	private Log log = LogFactory.getLog(SelectScrollController.class);
+	private Logger log = Logger.getLogger(SelectScrollController.class);
 	
 	private ApplicationContext applicationContext;
 	
@@ -80,7 +77,7 @@ public class SelectScrollController implements ApplicationContextAware {
 			try {
 				final long sTime = System.currentTimeMillis();
 				String msg = "starting : " + new SimpleDateFormat("HH:mm:ss").format(new Date(sTime));
-				log.debug(msg);
+				log.info("msg: " + msg);
 				Record rtnData = new Record();
 				rtnData.put("RESULT_CONTENTS", msg);
 				queue.put(rtnData);
@@ -107,7 +104,7 @@ public class SelectScrollController implements ApplicationContextAware {
 									Record r = new Record();
 									r.put("RESULT_CONTENTS", "get rows : " +df.format(totCnt) + " ("+(System.currentTimeMillis() - st)+")");
 									r.put("RESULT_STATUS", "PROC");
-									log.debug("queue.put : " + r);
+									log.info("queue.put : " + r);
 									m.put(totCnt/100000+"", (double)(System.currentTimeMillis() - sTime)/1000+"");
 									queue.put(r);
 									cnt = 0L;
@@ -120,7 +117,7 @@ public class SelectScrollController implements ApplicationContextAware {
 								msg += "\nget rows : " + df.format(totCnt) + " ("+(System.currentTimeMillis() - st)+")";
 								m.put(totCnt/100000+"", (double)(System.currentTimeMillis() - sTime)/1000+"");
 							}
-							log.debug(msg);
+							log.info(msg);
 							mvm.put(ds, m);
 							r.put("RESULT_CONTENTS", msg);
 							r.put("RESULT_STATUS", "END");
@@ -140,8 +137,8 @@ public class SelectScrollController implements ApplicationContextAware {
 		Record rtnData = new Record();
 		JSONObject obj = new JSONObject();
 		try {
-			log.debug("getMsg");
-			rtnData = queue.poll(1000000, TimeUnit.MILLISECONDS);
+			log.info("getMsg");
+			rtnData = queue.poll(100, TimeUnit.MILLISECONDS);
 			
 			if ("END".equals(rtnData.getString("RESULT_STATUS"))) {
 				String chart = "";
@@ -173,7 +170,7 @@ public class SelectScrollController implements ApplicationContextAware {
 				
 				rtnData.put("CHART_XML", chart);
 			}
-			log.debug("rtnData : " + rtnData);
+			log.info("rtnData : " + rtnData);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			rtnData.put("RESULT_STATUS", "ERROR");
@@ -193,13 +190,13 @@ public class SelectScrollController implements ApplicationContextAware {
 		JSONObject obj = new JSONObject();
 		try {
 			if (this.thread != null && this.thread.isAlive()) {
-				log.debug("executor is alive.");
+				log.info("executor is alive.");
 				rtnData.put("RESULT_CONTENTS", "executor is alive.");
 			} else {
 				this.queue = new LinkedBlockingQueue<Record>(50);
 				
 				Record params = WebUtil.getParametersStartingWith(request);
-				log.debug("params : " + params.toString());
+				log.info("params : " + params.toString());
 				DataSource dataSource = this.applicationContext.getBean(params.getString("ds"), DataSource.class);
 				
 				this.thread = new Thread(new SelectExecutor(params.getString("ds"), dataSource, params.getString("query"), new HashMap<String, String>(), 20000L));

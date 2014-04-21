@@ -2,17 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" media="screen" href="/html/js/lib/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.css"/><!-- jQuery UI CSS -->
-<link rel="stylesheet" type="text/css" media="screen" href="/html/css/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/html/js/lib/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.css"/><!-- jQuery UI CSS -->
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/html/css/style.css" />
 
-<script src="/html/js/lib/jquery/jquery-1.8.3.js" type="text/javascript"></script><!-- jQuery JS -->
-<script src="/html/js/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js" type="text/javascript"></script><!-- jQuery UI JS -->
-<script src="/html/js/common/common.js" type="text/javascript"></script><!-- common js Library -->
-<script src="/html/js/common/util.js" type="text/javascript"></script><!-- js util -->
-<script src="/html/js/common/logging.js" type="text/javascript"></script><!-- js logging -->
-<script src="/html/js/common/paging.js" type="text/javascript"></script><!-- js paging -->
-<script src="/html/js/common/session_manager.js" type="text/javascript"></script><!-- session timeout setting -->
-<script src="/html/js/lib/jquery/jquery.cookie.js" type="text/javascript"></script><!-- jQuery Cookie JS -->
+<script src="${pageContext.request.contextPath}/html/js/lib/jquery/jquery-1.8.3.js" type="text/javascript"></script><!-- jQuery JS -->
+<script src="${pageContext.request.contextPath}/html/js/lib/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js" type="text/javascript"></script><!-- jQuery UI JS -->
+<script src="${pageContext.request.contextPath}/html/js/common/common.js" type="text/javascript"></script><!-- common js Library -->
+<script src="${pageContext.request.contextPath}/html/js/common/util.js" type="text/javascript"></script><!-- js util -->
+<script src="${pageContext.request.contextPath}/html/js/common/logging.js" type="text/javascript"></script><!-- js logging -->
+<script src="${pageContext.request.contextPath}/html/js/common/paging.js" type="text/javascript"></script><!-- js paging -->
+<script src="${pageContext.request.contextPath}/html/js/common/session_manager.js" type="text/javascript"></script><!-- session timeout setting -->
+<script src="${pageContext.request.contextPath}/html/js/lib/jquery/jquery.cookie.js" type="text/javascript"></script><!-- jQuery Cookie JS -->
 <script type="text/javascript">
 $(function(){
     $( "#POPUP_LODDING" ).dialog({
@@ -22,10 +22,10 @@ $(function(){
     });
 });
 function doInsert3(){
-	if(confirm("TYPE4 실행합니다.")){
+	if(confirm("TYPE4 Run.")){
 		$.ajax({
 	        type:"POST",
-	        url:"/type5/demo/data/insert_batch.do",
+	        url:"${pageContext.request.contextPath}/type5/demo/data/insert_batch.do",
 	        data:{"ds":"ds_type4", "loop" : $("#V_LOOP_B").val(), "batch" : $("#V_BATCH_B").val()},
 	        dataType: "json",
 	        async:true,
@@ -50,10 +50,10 @@ function doInsert3(){
 	}
 }
 function doInsert4(){
-	if(confirm("TYPE5 실행합니다")){
+	if(confirm("TYPE5 Run")){
 		$.ajax({
 	        type:"POST",
-	        url:"/type5/demo/data/insert_batch.do",
+	        url:"${pageContext.request.contextPath}/type5/demo/data/insert_batch.do",
 	        data:{"ds":"ds_type5", "loop" : $("#V_LOOP_B").val(), "batch" : $("#V_BATCH_B").val()},
 	        dataType: "json",
 	        async:true,
@@ -107,8 +107,8 @@ VALUES (:C01,
 </div>
 <div class="section section2">
 	<ul >
-		<li class="section_title">로우수 : <input name="V_LOOP_B" id="V_LOOP_B"  type="text" class="inputtextbox" style="width:60px;" value="100" /></li>
-        <li class="section_title">배치수 : <input name="V_BATCH_B" id="V_BATCH_B"  type="text" class="inputtextbox" style="width:60px;" value="100" /></li>
+		<li class="section_title">Number of rows : <input name="V_LOOP_B" id="V_LOOP_B"  type="text" class="inputtextbox" style="width:60px;" value="100" /></li>
+        <li class="section_title">Can be placed : <input name="V_BATCH_B" id="V_BATCH_B"  type="text" class="inputtextbox" style="width:60px;" value="100" /></li>
 	</ul>
 </div>
 <div class="section section3">
@@ -134,14 +134,14 @@ VALUES (:C01,
 	</ul>
 </div>
 </div>
-<div id="POPUP_LODDING" class="loading" title="처리중..">
+<div id="POPUP_LODDING" class="loading" title="Processing..">
 	<ul>
 		<li>
 		<table border="0" cellspacing="0" cellpadding="0">
 		  <tr>
-			<td><img src="/html/image/loading.gif"/></td>
+			<td><img src="${pageContext.request.contextPath}/html/image/loading.gif"/></td>
 			<td>
-				<label>처리중입니다. <br/>잠시만 기다려 주세요.</label>
+				<label>Processing. <br/>Please Wait.</label>
 			</td>
 		  </tr>
 		</table>
