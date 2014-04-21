@@ -30,37 +30,13 @@
         <slf4j.version>1.6.6</slf4j.version>
         <spring.version>4.0.3.RELEASE</spring.version>
         <!--<spring.version>3.2.4.RELEASE</spring.version>-->
-        <!--<spring.version>2.5.6</spring.version>-->
         <servlet.api.version>2.5</servlet.api.version>
         <jsfVersion>2.2.6</jsfVersion>
         <primefacesVersion>3.4.2</primefacesVersion>
     </properties>
 
-    <!-- Configuration Management -->
-    <scm>
-        <connection>scm:svn:http://svn...</connection>
-        <developerConnection>scm:svn:http://svn...</developerConnection>
-    </scm>
-
     <!-- Build Configuration -->
     <build>
-        <!--
-                <extensions>
-                    <extension>
-                        <groupId>org.apache.maven.wagon</groupId>
-                        <artifactId>wagon-webdav</artifactId>
-                        <version>1.0-beta-2</version>
-                    </extension>
-                </extensions>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh</artifactId>
-                <version>1.0</version>
-            </extension>
-        </extensions>
-        -->
-
         <pluginManagement>
             <plugins>
                 <!-- Ensure build using JDK 1.7 -->
@@ -80,8 +56,6 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <version>2.3</version>
                     <configuration>
-                        <!--<webXml>src\main\webapp\WEB-INF\web.xml</webXml>-->
-                        <failOnMissingWebXml>false</failOnMissingWebXml>
                         <dependentWarIncludes>**/*</dependentWarIncludes>
                         <dependentWarExcludes>
                             WEB-INF/web.xml,index.*
@@ -212,84 +186,6 @@
             <url>https://maven.java.net/content/repositories/snapshots/</url>
         </repository>
     </repositories>
-
-    <!-- Reporting -->
-    <reporting>
-        <plugins>
-            <!-- JavaDoc Report -->
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8.1</version>
-                <configuration>
-                    <use>false</use>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <id>aggregate</id>
-                        <configuration/>
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            -->
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <configuration>
-                    <linkJavadoc>true</linkJavadoc>
-                </configuration>
-            </plugin>
-	    -->
-        </plugins>
-    </reporting>
-
-    <!-- Dependencies -->
-    <dependencies>
-        <!-- TESTING -->
-        <!--<dependency>-->
-            <!--<groupId>org.testng</groupId>-->
-            <!--<artifactId>testng</artifactId>-->
-            <!--<version>${testng.version}</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        -->
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-java</artifactId>-->
-            <!--<version>2.19.0</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.hamcrest</groupId>-->
-            <!--<artifactId>hamcrest-all</artifactId>-->
-            <!--<version>1.1</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>junit</groupId>-->
-            <!--<artifactId>junit</artifactId>-->
-            <!--<version>4.8.2</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>mysql</groupId>-->
-            <!--<artifactId>mysql-connector-java</artifactId>-->
-            <!--<version>5.1.21</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-    </dependencies>
 
     <!-- Developers -->
     <developers>
