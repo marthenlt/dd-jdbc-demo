@@ -49,7 +49,7 @@
 			<td height="200">&nbsp;</td>
 		</tr>
 		<tr>
-			<td><img src="${pageContext.request.contextPath}html/css/pwdpg2.png"></td>
+			<td><img src="${pageContext.request.contextPath}/html/css/pwdpg2.png"></td>
 		</tr>
 	</table>
 </div> 
